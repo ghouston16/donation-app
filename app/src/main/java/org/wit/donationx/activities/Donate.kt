@@ -1,7 +1,10 @@
 package org.wit.donationx.activities
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import org.wit.donationx.R
 import org.wit.donationx.databinding.ActivityDonateBinding
@@ -34,18 +37,43 @@ class Donate : AppCompatActivity() {
         donateLayout.donateButton.setOnClickListener {
             // Vaildation of input
             val amount = if (donateLayout.paymentAmount.text.isNotEmpty())
-                donateLayout.paymentAmount.text.toString().toInt() else donateLayout.amountPicker.value
+                donateLayout.paymentAmount.text.toString()
+                    .toInt() else donateLayout.amountPicker.value
             if (totalDonated >= donateLayout.progressBar.max)
-                Toast.makeText(applicationContext, "Donate Amount Exceeded!", Toast.LENGTH_LONG).show()
+                Toast.makeText(applicationContext, "Donate Amount Exceeded!", Toast.LENGTH_LONG)
+                    .show()
             else {
-                val paymentmethod = if (donateLayout.paymentMethod.checkedRadioButtonId == R.id.Direct)
-                    "Direct" else "Paypal"
+                val paymentmethod =
+                    if (donateLayout.paymentMethod.checkedRadioButtonId == R.id.Direct)
+                        "Direct" else "Paypal"
                 totalDonated += amount
                 donateLayout.totalSoFar.text = "$$totalDonated"
                 donateLayout.progressBar.progress = totalDonated
-                app.donationStore.create(DonationModel(paymentmethod = paymentmethod, amount = amount))
+                app.donationStore.create(
+                    DonationModel(
+                        paymentmethod = paymentmethod,
+                        amount = amount
+                    )
+                )
                 Timber.i("Total Donated so far $totalDonated")
             }
+        }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        //Inflate the menu
+        menuInflater.inflate(R.menu.menu_donate, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_report -> {
+                startActivity(Intent(this, Report::class.java))
+                true
+            }
+
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }
