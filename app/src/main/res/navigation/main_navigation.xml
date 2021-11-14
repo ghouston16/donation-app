@@ -6,12 +6,12 @@
     app:startDestination="@id/donateFragment">
     <fragment
         android:id="@+id/donateFragment"
-        android:name="org.wit.donationx.DonateFragment"
+        android:name="org.wit.donationx.fragments.DonateFragment"
         android:label="fragment_donate"
         tools:layout="@layout/fragment_donate" />
     <fragment
         android:id="@+id/reportFragment"
-        android:name="org.wit.donationx.ReportFragment"
+        android:name="org.wit.donationx.fragments.ReportFragment"
         android:label="fragment_report"
         tools:layout="@layout/fragment_report" />
 </navigation>

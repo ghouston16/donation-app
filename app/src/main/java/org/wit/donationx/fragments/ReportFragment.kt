@@ -1,4 +1,4 @@
-package org.wit.donationx
+package org.wit.donationx.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
+import org.wit.donationx.R
 import org.wit.donationx.adapters.DonationAdapter
 import org.wit.donationx.databinding.FragmentReportBinding
 import org.wit.donationx.main.DonationXApp
